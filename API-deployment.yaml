@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  namespace: api-sebas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: localhost:5000/servicios-cloud-sebas:4
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: mysql-password
